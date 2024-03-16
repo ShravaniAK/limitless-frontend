@@ -20,6 +20,7 @@ header {
     padding: 0 2rem;
     color: var(--textColor);
     position: relative;
+    margin: 20px;
 }
 
 nav a {
@@ -53,6 +54,7 @@ nav {
 }
 
 .active {
+    color: black;
     background-color: var(--mainColor);
 }
 
