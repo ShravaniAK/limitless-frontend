@@ -9,8 +9,8 @@ const Assets = () => {
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/order/findListings?assetclass=Equity');
-        setAssets(response.data.orders);
+        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/asset');
+        setAssets(response.data.assets);
       } catch (error) {
         console.error('Error fetching assets:', error);
       }
@@ -26,8 +26,8 @@ const Assets = () => {
     if (!searchTerm) {
       return true;
     }
-    return (asset.assetId.name && asset.assetId.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-           (asset.assetId.ticker && asset.assetId.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
+    return (asset.name && asset.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+           (asset.ticker && asset.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
   return (
@@ -45,11 +45,11 @@ const Assets = () => {
         {filteredAssets.map(asset => (
           <Link to={`/assets/${asset._id}`} key={asset._id} className="block">
             <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img src={asset.assetId.logo} alt={asset.assetId.name} className="w-full h-48 object-cover rounded-t-lg" />
+              <img src={asset.logo} alt={asset.name} className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-4">
-                <h2 className="text-lg font-semibold">{asset.assetId.name}</h2>
+                <h2 className="text-lg font-semibold">{asset.name}</h2>
                 <p className="text-gray-600">{asset.description}</p>
-                <p>Ticker: {asset.assetId.ticker}</p>
+                <p>Ticker: {asset.ticker}</p>
                 <p>Asset Class: {asset.assetClass}</p>
               </div>
             </div>
