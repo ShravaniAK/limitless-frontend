@@ -106,3 +106,29 @@ nav {
         font-size: 1.5rem;
     }
 }
+
+.bottom-arrow {
+    width: 20px;
+    height: 70px;
+    cursor: pointer;
+}
+
+.bottom-arrow>img {
+    width: 50px;
+}
+
+.dropdown button {
+    padding: 10px;
+    color: red;
+    cursor: pointer;
+    background-color: white;
+    border: 1px solid red;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: 0.3s ease-in-out;
+}
+
+.dropdown:hover button {
+    color: white;
+    background-color: red;
+}

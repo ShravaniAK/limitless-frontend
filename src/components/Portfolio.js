@@ -4,7 +4,6 @@ import Navbar from './Navbar'
 const Portfolio = () => {
   return (
     <div className='home'>
-      <Navbar/>
       
     </div>  )
 }

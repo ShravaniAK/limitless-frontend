@@ -9,6 +9,8 @@ function Navbar () {
   const [userEmail, setUserEmail] = useState('')
   const [userName, setUserName] = useState('')
   const [profile, setProfile] = useState('')
+  const [showDropdown, setShowDropdown] = useState(false);
+
 
   const getuserdeatils = () => {
     let config = {
@@ -40,6 +42,11 @@ function Navbar () {
     localStorage.removeItem('token')
     window.location.reload()
   }
+  
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
   return (
     <header>
       <h3>LOGO</h3>
@@ -84,9 +91,16 @@ function Navbar () {
           <p>{userName}</p>
           <p>{profile}</p>
         </div>
-        {/* <button  onClick={handleLogout}>
-					Logout
-				</button> */}
+        <div className="bottom-arrow" onClick={toggleDropdown}>
+        <img src="https://icons.veryicon.com/png/o/miscellaneous/decon/dropdown-1.png" alt="" />
+
+          {/* Dropdown menu */}
+          {showDropdown && (
+            <div className='dropdown'>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </div>
       </div>
     </header>
   )
