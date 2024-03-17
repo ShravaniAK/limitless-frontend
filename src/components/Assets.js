@@ -9,8 +9,8 @@ const Assets = () => {
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/order/findListings?assetclass=Equity');
-        setAssets(response.data.orders);
+        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/asset');
+        setAssets(response.data.assets);
       } catch (error) {
         console.error('Error fetching assets:', error);
       }
@@ -26,11 +26,12 @@ const Assets = () => {
     if (!searchTerm) {
       return true;
     }
-    return (asset.assetId.name && asset.assetId.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-           (asset.assetId.ticker && asset.assetId.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
+    return (asset.name && asset.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+           (asset.ticker && asset.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
   return (
+<<<<<<< HEAD
     <div className="container flex flex-col  mx-auto p-4">
       <div className="flex flex-col items-center mb-4">
         <input
@@ -52,6 +53,24 @@ const Assets = () => {
                 <p>Ticker: {asset.assetId.ticker}</p>
                 <p>Asset Class: {asset.assetClass}</p>
               </div>
+=======
+    <div className="list">
+      <input
+        type="text"
+        placeholder="Search assets..."
+        value={searchTerm}
+        onChange={handleSearchChange}
+      />
+      {filteredAssets.map(asset => (
+        <Link to={`/assets/${asset._id}`} key={asset._id} className="card-link">
+          <div className="card">
+            <img src={asset.logo} alt={asset.name} />
+            <div className="card-content">
+              <h2>{asset.name}</h2>
+              <p>{asset.description}</p>
+              <p>Ticker: {asset.ticker}</p>
+              <p>Asset Class: {asset.assetClass}</p>
+>>>>>>> c2770447c197bb5b3cbd54f779eacdb46b6a8aa9
             </div>
           </Link>
         ))}
