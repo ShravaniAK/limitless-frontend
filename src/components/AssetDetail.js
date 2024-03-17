@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaceholderLoading from 'react-placeholder-loading'
 import './asset.css'
+import Graph from './Graph';
 
 const AssetDetail = () => {
   const { id } = useParams();
@@ -50,6 +51,7 @@ const AssetDetail = () => {
   return (
     <div className='main'>
       <div className="info">
+      <img src = {assetDetail.logo}></img>
       <h2>{assetDetail.name}</h2>
       <p > ({assetDetail.ticker})</p>
       </div>
@@ -58,7 +60,7 @@ const AssetDetail = () => {
           <p>{assetDetail.description}</p>
         </div>
         <div className="right">
-      <img src={assetDetail.logo} alt={assetDetail.name} />
+        <Graph data={assetDetail.PastValues} />
         </div>
       </div>
     </div>
