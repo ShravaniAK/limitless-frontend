@@ -9,8 +9,8 @@ const Assets = () => {
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/order/findListings?assetclass=Equity');
-        setAssets(response.data.orders);
+        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/asset');
+        setAssets(response.data.assets);
       } catch (error) {
         console.error('Error fetching assets:', error);
       }
@@ -27,8 +27,8 @@ const Assets = () => {
     if (!searchTerm) {
       return true;
     }
-    return (asset.assetId.name && asset.assetId.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-           (asset.assetId.ticker && asset.assetId.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
+    return (asset.name && asset.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
+           (asset.ticker && asset.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
   });
 
   return (
@@ -40,14 +40,13 @@ const Assets = () => {
         onChange={handleSearchChange}
       />
       {filteredAssets.map(asset => (
-        // Use Link component to navigate to asset details page
         <Link to={`/assets/${asset._id}`} key={asset._id} className="card-link">
           <div className="card">
-            <img src={asset.logo} alt={asset.assetId.name} />
+            <img src={asset.logo} alt={asset.name} />
             <div className="card-content">
-              <h2>{asset.assetId.name}</h2>
+              <h2>{asset.name}</h2>
               <p>{asset.description}</p>
-              <p>Ticker: {asset.assetId.ticker}</p>
+              <p>Ticker: {asset.ticker}</p>
               <p>Asset Class: {asset.assetClass}</p>
             </div>
           </div>
