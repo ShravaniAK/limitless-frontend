@@ -17,8 +17,8 @@ function App() {
 		<div>
 		{user && <Navbar />}
 		<Routes>
-			{<Route path="/" element={<Home/>}/>}
-		  { !user &&<Route path="/" element={<><Navbar/><Home /></>} />}
+			{!user && <Route path="/" element={<><Navbar/><Home /></>}/>}
+		  { user && <Route path="/" element={<Home/>} />}
 		  {!user && <Route path="/signup" element={<Signup />} />}
 		  {!user && <Route path="/login" element={<Login />} />}
 		  {user && <Route path="/portfolio" element={<Portfolio />} />}
