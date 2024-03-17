@@ -49,7 +49,7 @@ function Navbar () {
 
   return (
     <header>
-      <h3>LOGO</h3>
+      <h3>OTC Nexus</h3>
       <nav ref={navRef}>
         <Link to='/' className={location.pathname === '/' ? 'active' : ''}>
           Home
