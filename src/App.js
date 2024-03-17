@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from "react-router-dom";
 import About from "./components/About";
-import Assets from "./components/Assets/assets";
+import Assets from "./components/Assets";
 import Home from "./components/Home";
 import Login from "./components/Login/Login";
 import Marketplace from "./components/Marketplace";
