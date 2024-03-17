@@ -1,0 +1,30 @@
+.main {
+    margin: 20px;
+}
+
+.info {
+    display: inline-block;
+}
+
+.info p {
+    color: #828282;
+    float: right;
+}
+
+.container {
+    display: flex;
+    justify-content: space-betwee;
+    align-items: center;
+    gap: 20px;
+}
+
+.left {
+    display: flex;
+    width: 40%;
+    align-items: center;
+    justify-content: center;
+}
+
+.right {
+    max-width: 40%;
+}

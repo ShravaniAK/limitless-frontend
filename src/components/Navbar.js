@@ -61,25 +61,20 @@ function Navbar () {
           Market Place
         </Link>
         <Link
-          to='/Assets'
+          to='/assets'
           className={location.pathname === '/assets' ? 'active' : ''}
         >
           Assets
         </Link>
         <Link
-          to='/Portfolio'
+          to='/portfolio'
           className={location.pathname === '/portfolio' ? 'active' : ''}
         >
           Portfolio
         </Link>
 
-        {/* <button className="nav-btn nav-close-btn" onClick={showNavbar}>
-                    <FaTimes />
-                </button> */}
       </nav>
-      {/* <button className="nav-btn" onClick={showNavbar}>
-                <FaBars />
-            </button> */}
+
       <div className='profilesection'>
         <div>
           <img

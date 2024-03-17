@@ -15,18 +15,24 @@ function App() {
 
 	return (
 		<div>
-		{user &&	<Navbar />}
+		{user && <Navbar />}
 		<Routes>
-      {user && <Route path="/" exact element={<Home />} />}
-			<Route path="/signup" exact element={<Signup />} />
-			<Route path="/login" exact element={<Login />} />
-			<Route path="/portfolio" exact element={<Portfolio />} />
-			<Route path="/marketplace" exact element={<Marketplace />} />
-			<Route path="/assets" exact element={<Assets />} />
-			<Route path="/" element={<Navigate replace to="/login" />} />
-			<Route path="/assets/:id" element={<AssetDetail />} />
+		  <Route path="/" element={<Home />} />
+		  {!user && <Route path="/signup" element={<Signup />} />}
+		  {!user && <Route path="/login" element={<Login />} />}
+		  {user && <Route path="/portfolio" element={<Portfolio />} />}
+		  {user && <Route path="/marketplace" element={<Marketplace />} />}
+		  {user && <Route path="/assets" element={<Assets />} />}
+		  {user && <Route path="/assets/:id" element={<AssetDetail />} />}
+		  {user && (
+			<>
+			  <Route path="/login" element={<Navigate to="/" replace />} />
+			  <Route path="/signup" element={<Navigate to="/" replace />} />
+			</>
+		  )}
+		  {!user && <Route path="*" element={<Navigate to="/login" replace />} />}
 		</Routes>
-		</div>
+	  </div>
 	);
 }
 

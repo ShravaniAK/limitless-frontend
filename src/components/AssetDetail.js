@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PlaceholderLoading from 'react-placeholder-loading'
+import './asset.css'
 
 const AssetDetail = () => {
   const { id } = useParams();
@@ -38,15 +40,44 @@ const AssetDetail = () => {
   }, [id, orders]);
 
   if (!assetDetail) {
-    return <div>Loading...</div>;
-  }
+    return (
+     <div className='main'>
+     <div className="info">
+     <h2>     <PlaceholderLoading shape="rect" width={60} height={20} /><br />
+</h2>
+     <p >     <PlaceholderLoading shape="rect" width={30} height={20} /><br />
+</p>
+     </div>
+     <div className="container">
+       <div className="left">
+         <p>     <PlaceholderLoading shape="rect" width={600} height={200} /><br />
+</p>
+       </div>
+       <div className="right">
+
+       </div>
+     </div>
+     <p>     <PlaceholderLoading shape="rect" width={60} height={20} /><br />
+</p>
+     <p>     <PlaceholderLoading shape="rect" width={600} height={200} /><br />
+</p>
+   </div>)
+  } 
 
   return (
-    <div>
-      <h2>{assetDetail.name} ({assetDetail.ticker})</h2>
-      <p>{assetDetail.description}</p>
-      <p>Asset Class: {assetDetail.assetClass}</p>
-      <p>Logo: <img src={assetDetail.logo} alt={assetDetail.name} /></p>
+    <div className='main'>
+      <div className="info">
+      <h2>{assetDetail.name}</h2>
+      <p > ({assetDetail.ticker})</p>
+      </div>
+      <div className="container">
+        <div className="left">
+          <p>{assetDetail.description}</p>
+        </div>
+        <div className="right">
+      <img src={assetDetail.logo} alt={assetDetail.name} />
+        </div>
+      </div>
     </div>
   );
 };
