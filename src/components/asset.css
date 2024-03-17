@@ -28,3 +28,9 @@
 .right {
     max-width: 40%;
 }
+
+.buy-button {
+    background-color: lime;
+    padding: 5px;
+    border-radius: 5px;
+}
