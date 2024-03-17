@@ -18,6 +18,7 @@ const Graph = ({ data }) => {
     showMark: true, // To display the marks on the chart
   }];
 
+
   return (
     <div>
       <LineChart
