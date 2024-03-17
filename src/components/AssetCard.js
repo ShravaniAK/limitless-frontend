@@ -1,14 +1,41 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import "../App.css"
-const AssetCard = ({ asset }) => {
+import axios from 'axios';
+const AssetCard = ({ asset ,id}) => {
+  
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+      
+    let data = JSON.stringify({
+      "orderId": id
+    });
+    
+    let config = {
+      method: 'post',
+      maxBodyLength: Infinity,
+      url: 'https://limitless-hackathon-backend.onrender.com/order/buy',
+      headers: { 
+        'Authorization':`Bearer ${localStorage.getItem("token")}`, 
+        'Content-Type': 'application/json'
+      },
+      data : data
+    };
+    
+    axios.request(config)
+    .then((response) => {
+      console.log(JSON.stringify(response.data));
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+};
   return (
     <div className="bg-white rounded-md shadow-md p-4 mb-4">
-      <Link to={`/assets/${asset._id}`}>
         <h3 className="text-xl font-semibold mb-2">
           {asset.assetId.name} ({asset.assetId.ticker})
         </h3>
-      </Link>
       <p className="text-gray-600 mb-2">{asset.assetId.description}</p>
       <p className="text-gray-600 mb-1">
         <span className="font-semibold">Asset Class:</span> {asset.assetClass}
@@ -26,6 +53,7 @@ const AssetCard = ({ asset }) => {
         <span className="font-semibold">Date:</span>{' '}
         {new Date(asset.date).toLocaleString()}
       </p>
+      <button className='buy-button' onClick={handleSubmit}>Buy Now</button>
     </div>
   );
 };

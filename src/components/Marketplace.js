@@ -7,7 +7,7 @@ const Marketplace = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://limitless-hackathon-backend.onrender.com/order/findListings?assetclass=Equity');
+        const response = await fetch('https://limitless-hackathon-backend.onrender.com/order/findListings');
         const data = await response.json();
         setAssets(data.orders);
       } catch (error) {
@@ -17,11 +17,10 @@ const Marketplace = () => {
 
     fetchData();
   }, []);
-
   return (
-    <div>
+    <div className='main'>
       <h1>Marketplace</h1>
-      <AssetList assets={assets} />
+      <AssetList assets={assets}  />
     </div>
   );
 };
