@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Card from './Card';
+import AssetList from './AssetList';
 
 const Marketplace = () => {
   const [assets, setAssets] = useState([]);
@@ -20,7 +20,8 @@ const Marketplace = () => {
 
   return (
     <div>
-      <Card assets={assets} />
+      <h1>Marketplace</h1>
+      <AssetList assets={assets} />
     </div>
   );
 };

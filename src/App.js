@@ -7,6 +7,7 @@ import Marketplace from "./components/Marketplace";
 import Portfolio from "./components/Portfolio";
 import Signup from "./components/Signup/Signup";
 import Navbar from "./components/Navbar";
+import AssetDetail from "./components/AssetDetail";
 
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
 			<Route path="/marketplace" exact element={<Marketplace />} />
 			<Route path="/assets" exact element={<Assets />} />
 			<Route path="/" element={<Navigate replace to="/login" />} />
+			<Route path="/assets/:id" element={<AssetDetail />} />
 		</Routes>
 		</div>
 	);
