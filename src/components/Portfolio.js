@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import axios from 'axios';
 import "../App.css"
+
 
 const Portfolio = () => {
   const [assetName, setAssetName] = useState('');
@@ -9,6 +10,61 @@ const Portfolio = () => {
   const [assetClass, setAssetClass] = useState('');
   const [price, setPrice] = useState('');
   const [quantity, setQuantity] = useState('');
+  const [trans, setTransactions] = useState([]);
+  const [userAssets, setUserAssets] = useState([]);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('Token not found in localStorage');
+          return;
+        }
+
+        const response = await axios.get(
+          'https://limitless-hackathon-backend.onrender.com/transaction/all',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+        // Ensure that the response.data is an array before setting it to transactions state
+          setTransactions(response.data.transactions);
+          console.log(trans);
+
+      } catch (error) {
+        console.error('Error fetching transactions:', error);
+      }
+    };
+
+    const fetchUserAssets = async () => {
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) {
+          console.error('Token not found in localStorage');
+          return;
+        }
+
+        const response = await axios.get(
+          'https://limitless-hackathon-backend.onrender.com/asset/userAssets',
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          }
+        );
+
+        setUserAssets(response.data.user.assets);
+      } catch (error) {
+        console.error('Error fetching user assets:', error);
+      }
+    };
+
+    fetchTransactions();
+    fetchUserAssets();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -51,7 +107,8 @@ const Portfolio = () => {
     }
   };
   return (
-    <div className="container mx-auto p-4">
+    <div className="container </div>mx-auto p-4">
+      <div >
       <h2 className="text-2xl font-bold mb-4">Post New Listing</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
@@ -132,6 +189,38 @@ const Portfolio = () => {
           Post Listing
         </button>
       </form>
+      </div>
+      <div>
+      <h2 className="text-2xl font-bold mb-4">Transactions</h2>
+      <div className="grid grid-cols-1 gap-4">
+          {trans.map((transaction) => (
+            <div key={transaction._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+              <div className="p-4">
+                <p className="text-gray-600 mb-2"><span className="font-semibold">Asset Name:</span> {transaction.assetId.name}</p>
+                <p className="text-gray-600 mb-2"><span className="font-semibold">Ticker:</span> {transaction.assetId.ticker}</p>
+                <p className="text-gray-600 mb-2"><span className="font-semibold">Quantity:</span> {transaction.quantity}</p>
+                <p className="text-gray-600 mb-2"><span className="font-semibold">Price:</span> {transaction.price}</p>
+                <p className="text-gray-600 mb-2"><span className="font-semibold">Status:</span> {transaction.status}</p>
+                <p className="text-gray-600 mb-2"><span className="font-semibold">Date:</span> {new Date(transaction.date).toLocaleString()}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+      <div className="container mx-auto p-4">
+      <h2 className="text-2xl font-bold mb-4">User Assets</h2>
+      <div className="grid grid-cols-1 gap-4">
+        {userAssets.map(asset => (
+          <div key={asset._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
+            <div className="p-4">
+              <p className="text-gray-600 mb-2"><span className="font-semibold">Asset Name:</span> {asset.assetId.name}</p>
+              <p className="text-gray-600 mb-2"><span className="font-semibold">Ticker:</span> {asset.assetId.ticker}</p>
+              <p className="text-gray-600 mb-2"><span className="font-semibold">Quantity:</span> {asset.quantity}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
     </div>
   );
 };
