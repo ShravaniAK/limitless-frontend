@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import "../App.css"
-
 const AssetCard = ({ asset }) => {
   return (
-    <div className="border border-gray-300 rounded-md p-4 mb-4">
+    <div className="bg-white rounded-md shadow-md p-4 mb-4">
       <Link to={`/assets/${asset._id}`}>
         <h3 className="text-xl font-semibold mb-2">
           {asset.assetId.name} ({asset.assetId.ticker})
