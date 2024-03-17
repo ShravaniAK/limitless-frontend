@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 
 const Assets = () => {
   const [assets, setAssets] = useState([]);
@@ -8,10 +9,8 @@ const Assets = () => {
   useEffect(() => {
     const fetchAssets = async () => {
       try {
-        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/order/findListings?assetclass=Equity'); // Replace 'your-backend-api-url' with your actual API endpoint
-        console.log(response.data)
-        setAssets(response.data.orders); // Assuming the response.data is an array of assets
-        filteredAssets=assets
+        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/order/findListings?assetclass=Equity');
+        setAssets(response.data.orders);
       } catch (error) {
         console.error('Error fetching assets:', error);
       }
@@ -41,15 +40,18 @@ const Assets = () => {
         onChange={handleSearchChange}
       />
       {filteredAssets.map(asset => (
-        <div className="card" key={asset._id}>
-          <img src={asset.logo} alt={asset.assetId.name} />
-          <div className="card-content">
-            <h2>{asset.assetId.name}</h2>
-            <p>{asset.description}</p>
-            <p>Ticker: {asset.assetId.ticker}</p>
-            <p>Asset Class: {asset.assetClass}</p>
+        // Use Link component to navigate to asset details page
+        <Link to={`/assets/${asset._id}`} key={asset._id} className="card-link">
+          <div className="card">
+            <img src={asset.logo} alt={asset.assetId.name} />
+            <div className="card-content">
+              <h2>{asset.assetId.name}</h2>
+              <p>{asset.description}</p>
+              <p>Ticker: {asset.assetId.ticker}</p>
+              <p>Asset Class: {asset.assetClass}</p>
+            </div>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -19,10 +19,9 @@ function App() {
       {user && <Route path="/" exact element={<Home />} />}
 			<Route path="/signup" exact element={<Signup />} />
 			<Route path="/login" exact element={<Login />} />
-			<Route path="/Portfolio" exact element={<Portfolio />} />
+			<Route path="/portfolio" exact element={<Portfolio />} />
 			<Route path="/marketplace" exact element={<Marketplace />} />
-			<Route path="/Assets" exact element={<Assets />} />
-			<Route path="/Aboutus" exact element={<About />} />
+			<Route path="/assets" exact element={<Assets />} />
 			<Route path="/" element={<Navigate replace to="/login" />} />
 		</Routes>
 		</div>

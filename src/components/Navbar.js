@@ -62,13 +62,13 @@ function Navbar () {
         </Link>
         <Link
           to='/Assets'
-          className={location.pathname === '/Assets' ? 'active' : ''}
+          className={location.pathname === '/assets' ? 'active' : ''}
         >
           Assets
         </Link>
         <Link
           to='/Portfolio'
-          className={location.pathname === '/Portfolio' ? 'active' : ''}
+          className={location.pathname === '/portfolio' ? 'active' : ''}
         >
           Portfolio
         </Link>
