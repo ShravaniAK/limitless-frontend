@@ -1,48 +1,109 @@
-import { useRef, useEffect, useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
-import "../main.css";
-import { Link, useNavigate } from "react-router-dom";
-import Portfolio from "./Portfolio";
+import { useRef, useEffect, useState } from 'react'
+import '../main.css'
+import { Link, useLocation } from 'react-router-dom'
+import axios from 'axios'
+function Navbar () {
+  const navRef = useRef()
+  const location = useLocation()
 
-function Navbar() {
-    const navRef = useRef();
-    const [userEmail, setUserEmail] = useState("");
+  const [userEmail, setUserEmail] = useState('')
+  const [userName, setUserName] = useState('')
+  const [profile, setProfile] = useState('')
+  const [showDropdown, setShowDropdown] = useState(false);
 
-    useEffect(() => {
-        const storedUserEmail = localStorage.getItem("userEmail");
-        if (storedUserEmail) {
-            setUserEmail(storedUserEmail);
-        }
-    }, []);
 
-    const showNavbar = () => {
-        navRef.current.classList.toggle("responsive_nav");
-    };
-	const handleLogout = () => {
-		localStorage.removeItem("token");
-		window.location.reload();
-	};
-    return (
-        <header>
-            <h3>LOGO</h3>
-            <nav ref={navRef}>
-                <Link to="/Portfolio">Portfolio</Link>
-                <Link to="/marketplace">Marketplace</Link>
-                <Link to="/Assets">Assets</Link>
-                <Link to="/Aboutus">About US</Link>
-                <span>{userEmail}</span>
-				<button  onClick={handleLogout}>
-					Logout
-				</button>
-                <button className="nav-btn nav-close-btn" onClick={showNavbar}>
+  const getuserdeatils = () => {
+    let config = {
+      method: 'get',
+      maxBodyLength: Infinity,
+      url: 'https://limitless-hackathon-backend.onrender.com/user/getuserdeatils',
+      headers: {
+        Authorization:
+          `bearer ${localStorage.getItem("token")}`
+      }
+    }
+    axios
+      .request(config)
+      .then(response => {
+        setUserName(response.data.user.name)
+        setProfile(response.data.user.accountBalance)
+      })
+      .catch(error => {
+      })
+  }
+  useEffect(() => {
+    getuserdeatils()
+    const storedUserEmail = localStorage.getItem("userEmail");
+    if (storedUserEmail) {
+        setUserEmail(storedUserEmail);
+    }
+}, []);
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    window.location.reload()
+  }
+  
+  const toggleDropdown = () => {
+    setShowDropdown(!showDropdown);
+  };
+
+  return (
+    <header>
+      <h3>LOGO</h3>
+      <nav ref={navRef}>
+        <Link to='/' className={location.pathname === '/' ? 'active' : ''}>
+          Home
+        </Link>
+        <Link
+          to='/marketplace'
+          className={location.pathname === '/marketplace' ? 'active' : ''}
+        >
+          Market Place
+        </Link>
+        <Link
+          to='/Assets'
+          className={location.pathname === '/assets' ? 'active' : ''}
+        >
+          Assets
+        </Link>
+        <Link
+          to='/Portfolio'
+          className={location.pathname === '/portfolio' ? 'active' : ''}
+        >
+          Portfolio
+        </Link>
+
+        {/* <button className="nav-btn nav-close-btn" onClick={showNavbar}>
                     <FaTimes />
-                </button>
-            </nav>
-            <button className="nav-btn" onClick={showNavbar}>
+                </button> */}
+      </nav>
+      {/* <button className="nav-btn" onClick={showNavbar}>
                 <FaBars />
-            </button>
-        </header>
-    );
+            </button> */}
+      <div className='profilesection'>
+        <div>
+          <img
+            className='icon'
+            src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
+          />
+        </div>
+        <div>
+          <p>{userName}</p>
+          <p>{profile}</p>
+        </div>
+        <div className="bottom-arrow" onClick={toggleDropdown}>
+        <img src="https://icons.veryicon.com/png/o/miscellaneous/decon/dropdown-1.png" alt="" />
+
+          {/* Dropdown menu */}
+          {showDropdown && (
+            <div className='dropdown'>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
+          )}
+        </div>
+      </div>
+    </header>
+  )
 }
 
-export default Navbar;
+export default Navbar

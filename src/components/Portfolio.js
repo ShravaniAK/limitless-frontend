@@ -1,9 +1,11 @@
 import React from 'react'
+import Navbar from './Navbar'
 
 const Portfolio = () => {
   return (
-    <div>Portfolio visible</div>
-  )
+    <div className='home'>
+      
+    </div>  )
 }
 
 export default Portfolio
