@@ -9,7 +9,7 @@
     font-size: 50px;
 }
 
-.info img{
+.info img {
     width: 100px;
 }
 
@@ -38,6 +38,7 @@
 
 .buy-button {
     background-color: lime;
-    padding: 5px;
+    padding: 5px 10px 5px 10px;
     border-radius: 5px;
+    margin: 5px 0 5px 0;
 }

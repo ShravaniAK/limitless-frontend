@@ -17,13 +17,10 @@ const Marketplace = () => {
 
     fetchData();
   }, []);
-  if(!assets){
-    return <div>loading</div>
-  }
   return (
     <div className='main'>
       <h1>Marketplace</h1>
-      <AssetList assets={assets} />
+      <AssetList assets={assets}  />
     </div>
   );
 };

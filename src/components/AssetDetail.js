@@ -10,6 +10,7 @@ const AssetDetail = () => {
 
 
   useEffect(() => {
+    console.log(id)
     const fetchAssetDetail = async () => {
       try {      
           const response = await fetch(`https://limitless-hackathon-backend.onrender.com/asset/${id}`);
