@@ -1,13 +1,12 @@
 import React from 'react';
 import './home.css'
-import Navbar from './Navbar';
-import banner3 from '../assets/banner3.jpeg'
+import banner2 from '../assets/Designer.png'
 import img from '../assets/img.png'
 
 const Home = () => {
   return (
     <div className='home'>
-    <img src={banner3} alt="" />
+    <img src={banner2} alt="" />
     <div className="container">
       <div className="left">
        

@@ -16,6 +16,7 @@
 
 .left img {
     width: 500px;
+    object-fit: contain;
 }
 
 .right h2 {
