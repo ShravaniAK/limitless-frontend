@@ -52,9 +52,8 @@ const AssetDetail = () => {
   return (
     <div className='main'>
       <div className="info">
-      <img src = {assetDetail.logo}></img>
       <h2>{assetDetail.name}</h2>
-      <p > ({assetDetail.ticker})</p>
+      <p > {assetDetail.ticker}</p>
       </div>
       <div className="container">
         <div className="left">

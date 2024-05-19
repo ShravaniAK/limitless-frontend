@@ -45,7 +45,7 @@ const Assets = () => {
         {filteredAssets.map(asset => (
           <Link to={`/assets/${asset._id}`} key={asset._id} className="block">
             <div className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300">
-              <img src={asset.logo} alt={asset.name} className="w-full h-48 object-cover rounded-t-lg" />
+              <img src={"https://source.unsplash.com/random/200x200?sig="+asset._id} alt={asset.name} className="w-full h-48 object-cover rounded-t-lg" />
               <div className="p-4">
                 <h2 className="text-lg font-semibold">{asset.name}</h2>
                 <p className="text-gray-600">{asset.description}</p>

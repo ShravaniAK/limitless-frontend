@@ -29,6 +29,8 @@ nav a {
     color: var(--textColor);
     text-decoration: none;
     border-radius: 0.4rem;
+    display: flex;
+    gap: 10px;
 }
 
 nav a:hover {
