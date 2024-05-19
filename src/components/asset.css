@@ -1,6 +1,5 @@
 .main {
     padding: 5%;
-    width: 100%;
 }
 
 .info {
@@ -22,20 +21,15 @@
 
 .container {
     display: flex;
-    justify-content: space-betwee;
-    align-items: center;
-    gap: 20px;
+    justify-content: space-between;
+    margin: 40px;
+    width: auto;
 }
 
 .left {
     display: flex;
-    width: 40%;
     align-items: center;
     justify-content: center;
-}
-
-.right {
-    max-width: 40%;
 }
 
 .buy-button {

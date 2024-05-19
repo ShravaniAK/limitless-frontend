@@ -1,4 +1,6 @@
 import React, { useState,useEffect } from 'react';
+import PlaceholderLoading from 'react-placeholder-loading'
+
 import axios from 'axios';
 import "../App.css"
 
@@ -106,15 +108,15 @@ const Portfolio = () => {
       console.error('Error posting listing:', error);
     }
   };
-  return (
-    <div className="container </div>mx-auto p-4">
-      <div >
+
+if(trans.length==0){
+  return(
+  <div className="container mx-auto p-4">
+    <div className="post-new-listing mb-8">
       <h2 className="text-2xl font-bold mb-4">Post New Listing</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label htmlFor="assetName" className="block font-semibold">
-            Asset Name
-          </label>
+          <label htmlFor="assetName" className="block font-semibold">Asset Name</label>
           <input
             type="text"
             id="assetName"
@@ -124,9 +126,7 @@ const Portfolio = () => {
           />
         </div>
         <div>
-          <label htmlFor="ticker" className="block font-semibold">
-            Ticker
-          </label>
+          <label htmlFor="ticker" className="block font-semibold">Ticker</label>
           <input
             type="text"
             id="ticker"
@@ -136,9 +136,7 @@ const Portfolio = () => {
           />
         </div>
         <div>
-          <label htmlFor="description" className="block font-semibold">
-            Description
-          </label>
+          <label htmlFor="description" className="block font-semibold">Description</label>
           <textarea
             id="description"
             value={description}
@@ -147,9 +145,7 @@ const Portfolio = () => {
           />
         </div>
         <div>
-          <label htmlFor="assetClass" className="block font-semibold">
-            Asset Class
-          </label>
+          <label htmlFor="assetClass" className="block font-semibold">Asset Class</label>
           <input
             type="text"
             id="assetClass"
@@ -159,9 +155,7 @@ const Portfolio = () => {
           />
         </div>
         <div>
-          <label htmlFor="price" className="block font-semibold">
-            Price
-          </label>
+          <label htmlFor="price" className="block font-semibold">Price</label>
           <input
             type="text"
             id="price"
@@ -171,9 +165,7 @@ const Portfolio = () => {
           />
         </div>
         <div>
-          <label htmlFor="quantity" className="block font-semibold">
-            Quantity
-          </label>
+          <label htmlFor="quantity" className="block font-semibold">Quantity</label>
           <input
             type="text"
             id="quantity"
@@ -182,47 +174,157 @@ const Portfolio = () => {
             className="w-full p-2 border border-gray-300 rounded"
           />
         </div>
-        <button
-          type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600"
-        >
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
           Post Listing
         </button>
       </form>
-      </div>
-      <div>
-      <h2 className="text-2xl font-bold mb-4">Transactions</h2>
-      <div className="grid grid-cols-1 gap-4">
-          {trans.map((transaction) => (
-            <div key={transaction._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-              <div className="p-4">
-                <p className="text-gray-600 mb-2"><span className="font-semibold">Asset Name:</span> {transaction.assetId.name}</p>
-                <p className="text-gray-600 mb-2"><span className="font-semibold">Ticker:</span> {transaction.assetId.ticker}</p>
-                <p className="text-gray-600 mb-2"><span className="font-semibold">Quantity:</span> {transaction.quantity}</p>
-                <p className="text-gray-600 mb-2"><span className="font-semibold">Price:</span> {transaction.price}</p>
-                <p className="text-gray-600 mb-2"><span className="font-semibold">Status:</span> {transaction.status}</p>
-                <p className="text-gray-600 mb-2"><span className="font-semibold">Date:</span> {new Date(transaction.date).toLocaleString()}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      <div className="container mx-auto p-4">
-      <h2 className="text-2xl font-bold mb-4">User Assets</h2>
-      <div className="grid grid-cols-1 gap-4">
-        {userAssets.map(asset => (
-          <div key={asset._id} className="bg-white shadow-lg rounded-lg overflow-hidden">
-            <div className="p-4">
-              <p className="text-gray-600 mb-2"><span className="font-semibold">Asset Name:</span> {asset.assetId.name}</p>
-              <p className="text-gray-600 mb-2"><span className="font-semibold">Ticker:</span> {asset.assetId.ticker}</p>
-              <p className="text-gray-600 mb-2"><span className="font-semibold">Quantity:</span> {asset.quantity}</p>
-            </div>
-          </div>
-        ))}
-      </div>
     </div>
+
+    
+    <div className="recent-activity mb-8 ">
+        <h2 className="text-1xl font-bold mb-4">Recent Activity</h2>
+        <ul className="space-y-4">
+              <li className="flex justify-between items-center bg-white p-2">
+              <div className="flex items-center space-x-4">
+                <span className="activity-icon text-blue-500">
+           <PlaceholderLoading shape="rect" width={20} height={20} />
+
+                  </span>
+                <span className="activity-name w-32 font-semibold truncate"><PlaceholderLoading shape="rect" width={60} height={20} /></span>
+              </div>
+              <div className="w-40 text-gray-600 text-center"><PlaceholderLoading shape="rect" width={30} height={20} /></div>
+           <PlaceholderLoading shape="rect" width={40} height={20} />
+            </li>
+        </ul>
+        <ul className="space-y-4">
+              <li className="flex justify-between items-center bg-white p-2">
+              <div className="flex items-center space-x-4">
+                <span className="activity-icon text-blue-500">
+           <PlaceholderLoading shape="rect" width={20} height={20} />
+
+                  </span>
+                <span className="activity-name w-32 font-semibold truncate"><PlaceholderLoading shape="rect" width={60} height={20} /></span>
+              </div>
+              <div className="w-40 text-gray-600 text-center"><PlaceholderLoading shape="rect" width={30} height={20} /></div>
+           <PlaceholderLoading shape="rect" width={40} height={20} />
+            </li>
+        </ul>
+        <ul className="space-y-4">
+              <li className="flex justify-between items-center bg-white p-2">
+              <div className="flex items-center space-x-4">
+                <span className="activity-icon text-blue-500">
+           <PlaceholderLoading shape="rect" width={20} height={20} />
+
+                  </span>
+                <span className="activity-name w-32 font-semibold truncate"><PlaceholderLoading shape="rect" width={60} height={20} /></span>
+              </div>
+              <div className="w-40 text-gray-600 text-center"><PlaceholderLoading shape="rect" width={30} height={20} /></div>
+           <PlaceholderLoading shape="rect" width={40} height={20} />
+            </li>
+        </ul>
+        
+      </div>
+    </div>)
+}
+else{
+
+
+
+  return (
+    <div className="container mx-auto p-4">
+    <div className="post-new-listing mb-8">
+      <h2 className="text-2xl font-bold mb-4">Post New Listing</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <div>
+          <label htmlFor="assetName" className="block font-semibold">Asset Name</label>
+          <input
+            type="text"
+            id="assetName"
+            value={assetName}
+            onChange={(e) => setAssetName(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <label htmlFor="ticker" className="block font-semibold">Ticker</label>
+          <input
+            type="text"
+            id="ticker"
+            value={ticker}
+            onChange={(e) => setTicker(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <label htmlFor="description" className="block font-semibold">Description</label>
+          <textarea
+            id="description"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <label htmlFor="assetClass" className="block font-semibold">Asset Class</label>
+          <input
+            type="text"
+            id="assetClass"
+            value={assetClass}
+            onChange={(e) => setAssetClass(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <label htmlFor="price" className="block font-semibold">Price</label>
+          <input
+            type="text"
+            id="price"
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <div>
+          <label htmlFor="quantity" className="block font-semibold">Quantity</label>
+          <input
+            type="text"
+            id="quantity"
+            value={quantity}
+            onChange={(e) => setQuantity(e.target.value)}
+            className="w-full p-2 border border-gray-300 rounded"
+          />
+        </div>
+        <button type="submit" className="bg-blue-500 text-white py-2 px-4 rounded hover:bg-blue-600">
+          Post Listing
+        </button>
+      </form>
+    </div>
+
+    
+    <div className="recent-activity mb-8 ">
+        <h2 className="text-1xl font-bold mb-4">Recent Activity</h2>
+        <ul className="space-y-4">
+          {
+          trans.map((transaction) => {
+            const date = new Date(transaction.date);
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            const formattedDate = date.toLocaleDateString('en-US', options);
+            return (
+              <li key={transaction._id} className="flex justify-between items-center bg-white p-2">
+              <div className="flex items-center space-x-4">
+                <span className="activity-icon text-blue-500">
+                  <img src={`https://source.unsplash.com/random/200x200?sig=${transaction._id}`} className="w-8 h-8 object-cover rounded-lg" />
+                </span>
+                <span className="activity-name w-32 font-semibold truncate">{transaction.assetId.name}</span>
+              </div>
+              <div className="w-40 text-gray-600 text-center">{formattedDate}</div>
+              <div className="w-20 text-gray-600 text-center font-semibold">{transaction.price}</div>
+            </li>
+          )})}
+        </ul>
+      </div>
     </div>
   );
-};
+};}
 
 export default Portfolio;
