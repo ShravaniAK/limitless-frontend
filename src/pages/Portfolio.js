@@ -8,6 +8,7 @@ import Transactions from '../components/Portfolio/Transactions';
 import MyListings from '../components/Portfolio/MyListings';
 import TransactionsChart from '../components/Portfolio/TransactionsChart';
 import PendingConfirmations from '../components/Portfolio/PendingComponent';
+const apiURL = process.env.REACT_APP_API_URL;
 
 const Portfolio = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -34,7 +35,7 @@ const Portfolio = () => {
         return;
       }
       const response = await axios.post(
-        'http://localhost:5000/order/create',
+        `${apiURL}/order/create`,
         formData,
         {
           headers: {

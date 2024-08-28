@@ -5,30 +5,31 @@ import {
   CategoryScale,
   LinearScale,
   LineElement,
-  PointElement, // Import PointElement
+  PointElement,
   Title,
   Tooltip,
   Legend,
+  TimeScale,
 } from 'chart.js';
+import 'chartjs-adapter-date-fns'; 
 
-// Register the required components
-ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, Title, Tooltip, Legend);
+
+ChartJS.register(CategoryScale, LinearScale, LineElement, PointElement, TimeScale, Title, Tooltip, Legend);
 
 const TransactionsChart = ({ transactions }) => {
-  // Filter completed transactions
-  const completedTransactions = transactions.filter(transaction => transaction.status === 'Completed');
 
-  // Prepare data for the chart
+  const completedTransactions = transactions.filter(transaction => transaction.status === 'Completed');
   const data = {
-    labels: completedTransactions.map(transaction => transaction.assetId.name),
+    labels: completedTransactions.map(transaction => new Date(transaction.date)),
     datasets: [
       {
-        label: 'Completed Transactions',
-        data: completedTransactions.map(transaction => transaction.price),
+        label: 'Transaction Value',
+        data: completedTransactions.map(transaction => transaction.quantity * transaction.price),
         fill: false,
         backgroundColor: '#dbb7ff40',
         borderColor: 'purple',
         borderWidth: 2,
+        tension: 0.5,
       },
     ],
   };
@@ -36,16 +37,20 @@ const TransactionsChart = ({ transactions }) => {
   const options = {
     scales: {
       x: {
+        type: 'time', 
         title: {
           display: true,
-          text: 'Assets',
+          text: 'Date',
+        },
+        time: {
+          unit: 'day',
         },
       },
       y: {
         beginAtZero: true,
         title: {
           display: true,
-          text: 'Price',
+          text: 'Value',
         },
       },
     },

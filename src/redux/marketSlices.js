@@ -1,5 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+const apiURL = process.env.REACT_APP_API_URL;
+
 
 const marketDataSlice = createSlice({
   name: 'marketData',
@@ -13,7 +15,7 @@ export const { setMarketData } = marketDataSlice.actions;
 
 export const fetchMarketData = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:5000/order/findListings');
+    const response = await axios.get(`${apiURL}/order/findListings`);
     dispatch(setMarketData(response.data.orders));
   } catch (error) {
     console.error('Error fetching market data:', error);

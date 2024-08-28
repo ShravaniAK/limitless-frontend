@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+const apiURL = process.env.REACT_APP_API_URL;
 
 const assetsSlice = createSlice({
   name: 'assets',
@@ -13,7 +14,8 @@ export const { setAssets } = assetsSlice.actions;
 
 export const fetchAssets = () => async (dispatch) => {
   try {
-    const response = await axios.get('http://localhost:5000/asset');
+    console.log(apiURL);
+    const response = await axios.get(`${apiURL}/asset`);
     dispatch(setAssets(response.data.assets));
   } catch (error) {
     console.error('Error fetching assets:', error);

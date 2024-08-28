@@ -1,42 +1,89 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { LineChart } from '@mui/x-charts';
+import { Line } from 'react-chartjs-2';
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale,
+} from 'chart.js';
+import { parseISO, format } from 'date-fns';
+
+// Register necessary components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  LineElement,
+  PointElement,
+  Title,
+  Tooltip,
+  Legend,
+  TimeScale // Register TimeScale for date handling
+);
 
 const Graph = ({ data }) => {
-  // Check if data is provided and is an array
   if (!Array.isArray(data) || data.length === 0) {
     return <div>No data available</div>;
   }
-
-  // Extract dates and prices from data array
-  const dates = data.map(item => new Date(item.date));
-  const prices = data.map(item => item.price);
-
-  // Define series for the LineChart
-  const series = [{
-    data: prices,
-    showMark: true, // To display the marks on the chart
-  }];
-
+  const formattedData = {
+    labels: data.map(item => parseISO(item.date)),
+    datasets: [
+      {
+        label: 'Price',
+        data: data.map(item => item.price),
+        fill: false,
+        backgroundColor: '#dbb7ff40',
+        borderColor: 'purple',
+        borderWidth: 2,
+        tension: 0.5,
+      },
+    ],
+  };
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      tooltip: {
+        callbacks: {
+          label: function (context) {
+            return `${context.dataset.label}: ${context.raw} `;
+          },
+        },
+      },
+    },
+    scales: {
+      x: {
+        type: 'time',
+        time: {
+          unit: 'day', 
+          tooltipFormat: 'MMM d, yyyy HH:mm',
+        },
+        title: {
+          display: true,
+          text: 'Date',
+        },
+      },
+      y: {
+        beginAtZero: true,
+        title: {
+          display: true,
+          text: 'Price',
+        },
+      },
+    },
+  };
 
   return (
-    <div>
-      <LineChart
-        xAxis={[{ data: dates }]}
-        series={series}
-        width={500}
-        height={400}
-        aspectRatio={2} // Adjust aspect ratio for better visualization
-        xAxisLabel="Date" // Add a descriptive label for the x-axis
-      />
+    <div className='w-full'>
+      <Line data={formattedData} options={options} />
     </div>
   );
-};
-Graph.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.shape({
-    date: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-  })).isRequired,
 };
 
 export default Graph;

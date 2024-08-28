@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import axios from 'axios';
 import { setPendingConfirmation } from '../../redux/portfolioSlices';
 import { fetchUserTransactions } from '../../redux/portfolioSlices';
+const apiURL = process.env.REACT_APP_API_URL;
 
 const PendingComponent = () => {
   const dispatch = useDispatch();
@@ -17,7 +18,7 @@ const PendingComponent = () => {
         return;
       }
       await axios.post(
-        'http://localhost:5000/transaction/confirm',
+        `${apiURL}/transaction/confirm`,
         { transactionId },
         {
           headers: {
@@ -40,7 +41,7 @@ const PendingComponent = () => {
         return;
       }
       await axios.post(
-        'http://localhost:5000/transaction/cancel',
+        `${apiURL}/transaction/cancel`,
         { transactionId },
         {
           headers: {

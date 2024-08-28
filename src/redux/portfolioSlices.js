@@ -1,5 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios';
+
+const apiURL = process.env.REACT_APP_API_URL;
+
 const portfolioSlice = createSlice({
   name: 'portfolio',
   initialState: {
@@ -16,15 +19,15 @@ const portfolioSlice = createSlice({
       state.transactions = action.payload;
     },
     setUserListings: (state, action) => {
-      state.listings = action.payload
+      state.listings = action.payload;
     },
     setPendingConfirmation: (state, action) => {
-      state.pendingConfirmation = action.payload
+      state.pendingConfirmation = action.payload;
     },
   },
 });
 
-export const { setUserAssets, setUserTransactions, setUserListings,setPendingConfirmation } = portfolioSlice.actions;
+export const { setUserAssets, setUserTransactions, setUserListings, setPendingConfirmation } = portfolioSlice.actions;
 
 export const fetchUserAssets = () => async (dispatch) => {
   try {
@@ -34,7 +37,7 @@ export const fetchUserAssets = () => async (dispatch) => {
       return;
     }
 
-    const response = await axios.get('http://localhost:5000/asset/userAssets', {
+    const response = await axios.get(`${apiURL}/asset/userAssets`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -55,7 +58,7 @@ export const fetchUserTransactions = () => async (dispatch) => {
     }
 
     const response = await axios.get(
-      'http://localhost:5000/transaction/all',
+      `${apiURL}/transaction/all`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -77,7 +80,7 @@ export const fetchUserListings = () => async (dispatch) => {
     }
 
     const response = await axios.get(
-      'http://localhost:5000/order/history',
+      `${apiURL}/order/history`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -99,7 +102,7 @@ export const fetchPendingConfirmation = () => async (dispatch) => {
     }
 
     const response = await axios.get(
-      'http://localhost:5000/transaction/seller',
+      `${apiURL}/transaction/seller`,
       {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -108,9 +111,8 @@ export const fetchPendingConfirmation = () => async (dispatch) => {
     );
     dispatch(setPendingConfirmation(response.data.filteredTransactions));
   } catch (error) {
-    console.error('Error fetching user listings:', error);
+    console.error('Error fetching pending confirmations:', error);
   }
 }
-
 
 export default portfolioSlice.reducer;
