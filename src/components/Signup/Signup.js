@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.css";
+import { toast } from "react-toastify";
 
 const Signup = () => {
     const [data, setData] = useState({ name: "", email: "", password: "" });
@@ -22,14 +23,14 @@ const Signup = () => {
                 password: data.password,
             });
             navigate("/login");
-            console.log(res.message);
+            toast.success("Signup Successful");
         } catch (error) {
             if (
                 error.response &&
                 error.response.status >= 400 &&
                 error.response.status <= 500
             ) {
-                setError(error.response.data.message);
+                toast.error("Invalid email or password");
             }
         }
     };

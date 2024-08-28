@@ -1,37 +1,27 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import useDebounce from '../Hooks/useDebounce'
+import { useSelector } from 'react-redux';
 
 const Assets = () => {
-  const [assets, setAssets] = useState([]);
+  const assets = useSelector((state) => state.assets);
   const [searchTerm, setSearchTerm] = useState('');
-
-  useEffect(() => {
-    const fetchAssets = async () => {
-      try {
-        const response = await axios.get('https://limitless-hackathon-backend.onrender.com/asset');
-        setAssets(response.data.assets);
-      } catch (error) {
-        console.error('Error fetching assets:', error);
-      }
-    };
-    fetchAssets();
-  }, []);
+  const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
   const filteredAssets = assets.filter(asset => {
-    if (!searchTerm) {
+    if (!debouncedSearchTerm) {
       return true;
     }
-    return (asset.name && asset.name.toLowerCase().includes(searchTerm.toLowerCase())) ||
-           (asset.ticker && asset.ticker.toLowerCase().includes(searchTerm.toLowerCase()));
+    return (asset.name && asset.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())) ||
+           (asset.ticker && asset.ticker.toLowerCase().includes(debouncedSearchTerm.toLowerCase()));
   });
 
   return (
-    <div className="container flex flex-col  mx-auto p-4">
+    <div className="container flex flex-col mx-auto p-4">
       <div className="flex flex-col items-center mb-4">
         <input
           type="text"
@@ -58,6 +48,6 @@ const Assets = () => {
       </div>
     </div>
   );
-}
+};
 
 export default Assets;

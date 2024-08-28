@@ -41,3 +41,24 @@
     transform: rotate(360deg);
   }
 }
+
+/* src/App.css */
+.modal {
+  background: white;
+  padding: 2rem;
+  border-radius: 8px;
+  width: 600px;
+  margin: 1rem;
+}
+
+.overlay {
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

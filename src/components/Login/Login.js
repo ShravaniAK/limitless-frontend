@@ -2,6 +2,7 @@ import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
+import { toast } from "react-toastify";
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
@@ -20,7 +21,8 @@ const Login = () => {
                 password: data.password,
             });
             localStorage.setItem("token", res.token,86400000);
-            localStorage.setItem("userEmail", data.email,86400000); // Store the user's email
+            localStorage.setItem("userEmail", data.email,86400000);
+            toast.success("Login Successful");
             window.location = "/";
         } catch (error) {
             if (
@@ -28,7 +30,7 @@ const Login = () => {
                 error.response.status >= 400 &&
                 error.response.status <= 500
             ) {
-                setError(error.response.data.message);
+                toast.error("Invalid email or password");
             }
         }
     };
