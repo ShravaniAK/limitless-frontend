@@ -19,20 +19,6 @@
     float: right;
 }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    margin: 40px 80px;
-    width: auto;
-}
-
-.left {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    max-width: 400px;
-}
-
 .buy-button {
     background-color: lime;
     padding: 5px 10px 5px 10px;

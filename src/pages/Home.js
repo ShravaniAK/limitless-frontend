@@ -6,11 +6,11 @@ import img from '../assets/img.png'
 const Home = () => {
   return (
     <div className='home'>
-    <img src={banner2} alt="" />
-    <div className="container">
+    <img src={banner2} alt="" id='homeimg'/>
+    <div id="container">
       <div className="left">
        
-        <img src={img} alt="" />
+        <img src={img} alt="image" />
       </div>
       <div className="right">
       <h2>Why to use ?</h2>

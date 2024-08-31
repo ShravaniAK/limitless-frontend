@@ -53,12 +53,7 @@ const Portfolio = () => {
 
   return (
     <div className="px-12 flex flex-col h-[calc(100vh-120px)]">
-      <div className='flex justify-between items-center'>
-        <h1 className='text-xl'>Portfolio</h1>
-        <button onClick={openModal} className="bg-primary text-black py-1 px-4 rounded-xl hover:text-secondary mb-4">
-          Add New Listing
-        </button>
-      </div>
+
       <PostListingModal
         isOpen={isModalOpen}
         onClose={closeModal}
@@ -73,6 +68,11 @@ const Portfolio = () => {
       
       </div>
       <div className='flex flex-col w-[50%] '>
+      <div className='flex items-center justify-end'>
+        <button onClick={openModal} className="bg-primary text-black py-1 px-4 rounded-xl hover:text-secondary mb-4 ">
+          Add New Listing
+        </button>
+      </div>
       <TransactionsChart transactions={transactions} />
       <PendingConfirmations />      
       </div>

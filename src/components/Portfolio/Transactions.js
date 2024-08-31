@@ -8,7 +8,7 @@ const Transactions = ({ transactions }) => {
   );
 
   return (
-    <div className="recent-activity h-[48%] overflow-scroll">
+    <div className="recent-activity h-[48%] overflow-y-scroll">
       <h2 className="text-xl font-bold mb-4">Transactions</h2>
 
       <div className="flex space-x-4 items-center mb-4">

@@ -8,7 +8,6 @@ const Marketplace = () => {
   const filteredAssets = assets.filter((asset) => asset.status === 'Pending');
   return (
     <div className='main'>
-      <h1>Marketplace</h1>
       <AssetList assets={filteredAssets} />
     </div>
   );

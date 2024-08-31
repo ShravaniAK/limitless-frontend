@@ -3,6 +3,9 @@ import '../main.css'
 import { Link, useLocation } from 'react-router-dom'
 import axios from 'axios'
 import MenuIcon from '../icons/menuIcon.svg'
+import HomeIcon from '../icons/homeIcon.svg'
+import MarketIcon from '../icons/marketIcon.svg'
+import AssetIcon from '../icons/assetIcon.svg'
 
 
 
@@ -56,21 +59,21 @@ function Navbar () {
       <h3>OTC Nexus</h3>
       <nav ref={navRef}>
         <Link to='/' className={location.pathname === '/' ? 'active' : ''}>
-        {location.pathname === '/' ? <img src={MenuIcon} alt="menu" />: null} 
+        {location.pathname === '/' ? <img src={HomeIcon} alt="home" />: null} 
           Home
         </Link>
         <Link
           to='/marketplace'
           className={location.pathname === '/marketplace' ? 'active' : ''}
         >
-          {location.pathname === '/marketplace' ? <img src={MenuIcon} alt="menu" />: null} 
+          {location.pathname === '/marketplace' ? <img src={MarketIcon} alt="market" />: null} 
           Market Place
         </Link>
         <Link
           to='/assets'
           className={location.pathname === '/assets' ? 'active' : ''}
         >
-          {location.pathname === '/assets' ? <img src={MenuIcon} alt="menu" />: null} 
+          {location.pathname === '/assets' ? <img src={AssetIcon} alt="assets" />: null} 
           Assets
         </Link>
         <Link
