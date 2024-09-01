@@ -8,7 +8,7 @@ const MyListings = ({ userListings }) => {
   );
 
   return (
-    <div className="recent-activity h-[48%] overflow-y-scroll">
+    <div className="recent-activity h-[48%]">
       <h2 className="text-xl font-bold mb-4">My Listings</h2>
 
       {/* Status Switcher Buttons */}

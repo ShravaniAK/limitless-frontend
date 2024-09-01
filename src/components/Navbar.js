@@ -6,8 +6,9 @@ import MenuIcon from '../icons/menuIcon.svg'
 import HomeIcon from '../icons/homeIcon.svg'
 import MarketIcon from '../icons/marketIcon.svg'
 import AssetIcon from '../icons/assetIcon.svg'
-
-
+import nextlogo from '../assets/nextjs-icon-svgrepo-com.svg'
+import { motion } from 'framer-motion';
+import LoadingSVG from '../assets/logo'
 
 function Navbar () {
   const navRef = useRef()
@@ -56,7 +57,7 @@ function Navbar () {
 
   return (
     <header>
-      <h3>OTC Nexus</h3>
+       < LoadingSVG />
       <nav ref={navRef}>
         <Link to='/' className={location.pathname === '/' ? 'active' : ''}>
         {location.pathname === '/' ? <img src={HomeIcon} alt="home" />: null} 
