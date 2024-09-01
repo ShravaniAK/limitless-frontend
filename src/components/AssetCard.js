@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link, useParams } from 'react-router-dom';
-import "../App.css"
 import axios from 'axios';
-const AssetCard = ({ asset ,id}) => {
-  
+import "../App.css";
 
+const AssetCard = ({ asset, id }) => {
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
       
@@ -20,40 +19,35 @@ const AssetCard = ({ asset ,id}) => {
         'Authorization':`Bearer ${localStorage.getItem("token")}`, 
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
     
     axios.request(config)
-    .then((response) => {
-      window.location.reload();
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
+      .then((response) => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   return (
-    <div className="bg-white rounded-md shadow-md p-4 mb-4">
-        <h3 className="text-xl font-semibold mb-2">
-          {asset.assetId.name} ({asset.assetId.ticker})
-        </h3>
-      <p className="text-gray-600 mb-2">{asset.assetId.description}</p>
-      <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Asset Class:</span> {asset.assetClass}
-      </p>
-      <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Quantity:</span> {asset.quantity}
-      </p>
-      <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Price:</span> {asset.price}
-      </p>
-      <p className="text-gray-600 mb-1">
-        <span className="font-semibold">Status:</span> {asset.status}
-      </p>
-      <p className="text-gray-600">
-        <span className="font-semibold">Date:</span>{' '}
-        {new Date(asset.date).toLocaleString()}
-      </p>
-      <button className='buy-button' onClick={handleSubmit}>Buy Now</button>
+    <div className="asset-card">
+      <div className="asset-card-row">
+        <div className="asset-symbol">
+          <input type="checkbox" />
+          <span>{asset.assetId.ticker}</span>
+        </div>
+        <div className="asset-name">{asset.assetId.name}</div>
+        <div className="asset-price">{asset.price}</div>
+        <div className="asset-change">+0.11 (6.59%)</div> 
+        <div className="asset-high">{/* High value here */}</div>
+        <div className="asset-low">{/* Low value here */}</div>
+        <div className="asset-volume">{/* Volume value here */}</div>
+        <div className="asset-mktcap">{/* Market Cap value here */}</div>
+        <div className="asset-updated">{/* Updated time here */}</div>
+        <button className="buy-button" onClick={handleSubmit}>Buy Now</button>
+      </div>
     </div>
   );
 };
