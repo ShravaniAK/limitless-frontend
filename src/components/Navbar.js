@@ -6,8 +6,7 @@ import MenuIcon from '../icons/menuIcon.svg'
 import HomeIcon from '../icons/homeIcon.svg'
 import MarketIcon from '../icons/marketIcon.svg'
 import AssetIcon from '../icons/assetIcon.svg'
-import nextlogo from '../assets/nextjs-icon-svgrepo-com.svg'
-import { motion } from 'framer-motion';
+import { Dropdown } from 'flowbite';
 import LoadingSVG from '../assets/logo'
 
 function Navbar () {
@@ -17,7 +16,7 @@ function Navbar () {
   const [userEmail, setUserEmail] = useState('')
   const [userName, setUserName] = useState('')
   const [profile, setProfile] = useState('')
-  const [showDropdown, setShowDropdown] = useState(false);
+
 
 
   const getuserdeatils = () => {
@@ -48,12 +47,10 @@ function Navbar () {
 }, []);
   const handleLogout = () => {
     localStorage.removeItem('token')
+    localStorage.removeItem('userEmail')
     window.location.reload()
   }
   
-  const toggleDropdown = () => {
-    setShowDropdown(!showDropdown);
-  };
 
   return (
     <header>
@@ -88,7 +85,7 @@ function Navbar () {
       </nav>
 
       <div className='flex justify-center items-center space-x-4'>
-        <div>
+        {/* <div>
           <img
             src='https://cdn-icons-png.flaticon.com/512/3135/3135715.png'
             width='20'
@@ -101,18 +98,40 @@ function Navbar () {
           <p>{userName}</p>
           <p>{profile}</p>
         </div>
-        <div className="relative" onClick={toggleDropdown}>
+        <div className="relative" >
         <img src="https://icons.veryicon.com/png/o/miscellaneous/decon/dropdown-1.png" alt="" className='w-8 h-8 rounded-full'  
-        />
-
-          {/* Dropdown menu */}
-          
+        />          
         </div>
-        {showDropdown && (
-            <div className='absolute top-16 bg-white border border-1 shadow-sm rounded-sm z-4  px-4 py-2'>
-              <button onClick={handleLogout} className='text-red-600 border border-red-600 border-1 px-4 py-1 rounded-lg'>Logout</button>
-            </div>
-          )}
+         */}
+         
+        {
+          !userEmail && 
+          <button type="button" onClick={() => window.location.href = '/login'}  class="text-purple-700 hover:text-white border border-purple-700 hover:bg-purple-800 focus:ring-4 focus:outline-none focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2 dark:border-purple-400 dark:text-purple-400 dark:hover:text-white dark:hover:bg-purple-500 dark:focus:ring-purple-900">Sign in</button>
+        }
+        
+
+        
+<button id="dropdownUserAvatarButton" data-dropdown-toggle="dropdownAvatar" class="flex text-sm bg-purple-800 rounded-full md:me-0 focus:ring-4 focus:ring-purple-300 dark:focus:ring-purple-200" type="button">
+<span class="sr-only">Open user menu</span>
+{
+userEmail &&
+<img class="w-10 h-10 rounded-full" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" alt="user photo"/>
+}
+
+</button> 
+
+<div id="dropdownAvatar" class="z-10 hidden bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600">
+    <div class="px-4 py-3 text-sm text-gray-900 dark:text-white">
+      <div>{userName}</div>
+      <div class="font-medium truncate">{userEmail}</div>
+    </div>
+    
+    <div class="py-2">
+      <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white" onClick={handleLogout}>Sign out</a>
+    </div>
+</div>
+
+       
       </div>
     </header>
   )
