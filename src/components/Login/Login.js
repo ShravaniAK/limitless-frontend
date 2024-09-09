@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.css";
 import { toast } from "react-toastify";
+const apiURL = process.env.REACT_APP_API_URL;
 
 const Login = () => {
     const [data, setData] = useState({ email: "", password: "" });
@@ -15,7 +16,7 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const url = "https://limitless-hackathon-backend.onrender.com/auth/login";
+            const url = `${apiURL}/auth/login`;
             const { data: res } = await axios.post(url, {
                 email: data.email,
                 password: data.password,
